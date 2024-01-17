@@ -1,0 +1,29 @@
+server:
+  port: 8090
+  servlet:
+    context-path: /api/belbin
+
+spring:
+  datasource:
+    url : jdbc:postgresql://localhost:5432/teambuilder_db
+    username : postgres
+    password : admin
+
+  jpa:
+    generate-ddl : true
+    hibernate :
+      ddl-auto : create
+    properties:
+      hibernate:
+        dialect : org.hibernate.dialect.PostgreSQLDialect
+        default_schema: belbin
+
+  output:
+    ansi:
+      enabled : always
+
+springdoc:
+  show-actuator: false
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
