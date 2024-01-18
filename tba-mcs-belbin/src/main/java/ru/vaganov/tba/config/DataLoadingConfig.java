@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import ru.vaganov.tba.models.BelbinRole;
+import ru.vaganov.tba.repositories.BelbinRoleRepository;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,14 +22,14 @@ public class DataLoadingConfig {
             havingValue = "true",
             matchIfMissing = true)
     @Bean
-    public CommandLineRunner catalogDataLoader() {
+    public CommandLineRunner catalogDataLoader(BelbinRoleRepository repository) {
         return args -> {
             log.info("Role Catalog Loading ...");
             ObjectMapper objectMapper = new ObjectMapper();
             try {
                 BelbinRole[] roles = objectMapper.readValue(getClass().getResource("/RoleCatalog.json"),BelbinRole[].class);
                 Arrays.asList(roles).forEach(role ->{
-                    // TODO save to repo
+                    repository.save(role);
                     log.info("Saving role of \""+ role.getEngName() +"\" ");
                 });
 
