@@ -22,6 +22,11 @@ spring:
     ansi:
       enabled : always
 
+command-line-runner:
+  data-loading:
+    role-catalog:
+      enabled: true
+
 springdoc:
   show-actuator: false
   swagger-ui:
