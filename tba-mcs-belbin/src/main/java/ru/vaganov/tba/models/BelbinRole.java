@@ -18,6 +18,7 @@ public class BelbinRole {
     @Column(name = "role_group")
     @Enumerated(value = EnumType.STRING)
     private RoleGroup group;
+    private Long number;
 
 
     public enum RoleGroup{

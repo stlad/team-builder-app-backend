@@ -1,11 +1,10 @@
 package ru.vaganov.tba.models;
 
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
+@Entity @Table(name = "blocks")
 @Data @Builder
 @NoArgsConstructor @AllArgsConstructor
 @EqualsAndHashCode
@@ -15,4 +14,6 @@ public class BlockQuestion {
     private Long id;
 
     private String blockContent;
+
+    private Long number;
 }
