@@ -8,14 +8,11 @@ import ru.vaganov.tba.mapper.QuestionMapper;
 import ru.vaganov.tba.models.BlockQuestion;
 import ru.vaganov.tba.models.Question;
 import ru.vaganov.tba.models.dto.AnswerBlank;
-import ru.vaganov.tba.models.dto.BlockQuestionDTO;
-import ru.vaganov.tba.models.dto.QuestionDTO;
 import ru.vaganov.tba.repositories.BelbinRoleRepository;
 import ru.vaganov.tba.repositories.BlockQuestionRepository;
 import ru.vaganov.tba.repositories.QuestionRepository;
 import ru.vaganov.tba.service.responses.BlockQuestionResponseDTO;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,11 +43,5 @@ public class BelbinService {
                 .questions(questionMapper.toDto(questions))
                 .build();
         return response;
-    }
-
-    public AnswerBlank getAnswerBlank(){
-        Map<String, Integer> blank = new HashMap<>();
-        belbinRoleRepository.findAll().stream().forEach(belbinRole -> blank.put(belbinRole.getEngName(), 0));
-        return new AnswerBlank(blank);
     }
 }

@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.vaganov.tba.models.dto.AnswerBlank;
 import ru.vaganov.tba.service.BelbinService;
+import ru.vaganov.tba.service.SolverService;
 import ru.vaganov.tba.service.responses.BlockQuestionResponseDTO;
 
 @CrossOrigin(origins = "*")
@@ -19,6 +20,8 @@ public class QuestionController {
     @Autowired
     private BelbinService belbinService;
 
+    @Autowired
+    private SolverService solverService;
 
     @GetMapping("/block/{number}")
     public ResponseEntity<BlockQuestionResponseDTO> getBlockByNumber(@PathVariable(value = "number") Long number){
@@ -30,7 +33,14 @@ public class QuestionController {
     @GetMapping("/blank")
     public ResponseEntity<AnswerBlank> getEmptyBlank(){
         log.info("GET to /questions/blank");
-        return new ResponseEntity<>(belbinService.getAnswerBlank(), HttpStatus.OK);
+        return new ResponseEntity<>(solverService.getAnswerBlank(), HttpStatus.OK);
+    }
+
+    @PostMapping("/blank")
+    public ResponseEntity<AnswerBlank> getAnswers(@RequestBody AnswerBlank answerBlank){
+        log.info("POST to /questions/blank");
+        solverService.getTestResult(answerBlank);
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
 }
