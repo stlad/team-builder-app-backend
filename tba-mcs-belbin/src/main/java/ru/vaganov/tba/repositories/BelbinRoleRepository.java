@@ -10,5 +10,6 @@ import java.util.Optional;
 @Repository
 public interface BelbinRoleRepository extends JpaRepository<BelbinRole, Long> {
     Optional<BelbinRole> findByEngName(String engName);
+    Optional<BelbinRole> findByRusName(String rusName);
     Optional<BelbinRole> findByNumber(Long number);
 }

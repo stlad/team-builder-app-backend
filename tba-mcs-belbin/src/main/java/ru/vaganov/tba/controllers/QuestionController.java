@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.vaganov.tba.models.dto.AnswerBlank;
+import ru.vaganov.tba.models.dto.ResultBlank;
 import ru.vaganov.tba.service.BelbinService;
 import ru.vaganov.tba.service.SolverService;
 import ru.vaganov.tba.service.responses.BlockQuestionResponseDTO;
@@ -37,10 +38,9 @@ public class QuestionController {
     }
 
     @PostMapping("/blank")
-    public ResponseEntity<AnswerBlank> getAnswers(@RequestBody AnswerBlank answerBlank){
+    public ResponseEntity<ResultBlank> getAnswers(@RequestBody AnswerBlank answerBlank){
         log.info("POST to /questions/blank");
-        solverService.getTestResult(answerBlank);
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        ResultBlank resultBlank = solverService.getTestResult(answerBlank);
+        return new ResponseEntity<>(resultBlank, HttpStatus.OK);
     }
-
 }
