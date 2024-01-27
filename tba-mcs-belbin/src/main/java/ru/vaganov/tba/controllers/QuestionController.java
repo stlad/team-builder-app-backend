@@ -12,6 +12,8 @@ import ru.vaganov.tba.service.BelbinService;
 import ru.vaganov.tba.service.SolverService;
 import ru.vaganov.tba.service.responses.BlockQuestionResponseDTO;
 
+import java.time.LocalDateTime;
+
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/questions")
@@ -26,20 +28,20 @@ public class QuestionController {
 
     @GetMapping("/block/{number}")
     public ResponseEntity<BlockQuestionResponseDTO> getBlockByNumber(@PathVariable(value = "number") Long number){
-        log.info("GET to /questions/block/"+number);
+        log.info(String.format("%s GET to /questions/block/%d", LocalDateTime.now(), number));
         BlockQuestionResponseDTO response = belbinService.getBlockByNumber(number);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping("/blank")
     public ResponseEntity<AnswerBlank> getEmptyBlank(){
-        log.info("GET to /questions/blank");
+        log.info(String.format("%s GET to /questions/blank", LocalDateTime.now()));
         return new ResponseEntity<>(solverService.getAnswerBlank(), HttpStatus.OK);
     }
 
     @PostMapping("/blank")
     public ResponseEntity<ResultBlank> getAnswers(@RequestBody AnswerBlank answerBlank){
-        log.info("POST to /questions/blank");
+        log.info(String.format("%s POST to /questions/blank", LocalDateTime.now()));
         ResultBlank resultBlank = solverService.getTestResult(answerBlank);
         return new ResponseEntity<>(resultBlank, HttpStatus.OK);
     }

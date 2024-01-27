@@ -10,6 +10,8 @@ import ru.vaganov.tba.models.BelbinRole;
 import ru.vaganov.tba.models.dto.BelbinRoleDTO;
 import ru.vaganov.tba.service.BelbinService;
 
+import java.time.LocalDateTime;
+
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/roles")
@@ -22,7 +24,7 @@ public class BelbinRoleController {
 
     @GetMapping("/{roleName}")
     public ResponseEntity<BelbinRoleDTO> getRoleByName(@PathVariable(value = "roleName") String roleName){
-        log.info("GET to /roles/"+roleName);
+        log.info(String.format("%s GET to /roles/%s", LocalDateTime.now(), roleName));
         BelbinRoleDTO dto = belbinService.getBelbinRoleByName(roleName);
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
