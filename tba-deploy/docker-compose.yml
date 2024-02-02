@@ -1,0 +1,13 @@
+version: '3.8'
+
+
+services:
+
+  tba-frontend:
+    image: tba-frontend:latest
+    build: 
+        context: frontend
+        dockerfile: Dockerfile
+    container_name: tba-frontend
+    ports:
+      - '80:80'
