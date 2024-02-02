@@ -11,3 +11,52 @@ services:
     container_name: tba-frontend
     ports:
       - '80:80'
+    networks:
+      - tbaNetwork
+
+
+  tba-mcs-belbin:
+    image: 'tba-mcs-belbin:latest'
+    build:
+        context: backend/belbin
+        dockerfile: Dockerfile
+    container_name: tba-mcs-belbin
+    depends_on:
+       tba-database:
+        condition: service_healthy
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://tba-db:5432/teambuilder_db
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=admin
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    ports:
+      - 8090:8090
+    networks:
+      - tbaNetwork
+
+
+
+  tba-database:
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready", "--quiet"]
+      interval: 1s
+      timeout: 5s
+      retries: 10
+    image: 'postgres:14.7-alpine'
+    container_name: tba-db
+    environment:
+      - POSTGRES_DB=teambuilder_db
+      - POSTGRES_USER=postgres
+      - PGUSER=postgres
+      - POSTGRES_PASSWORD=admin
+    ports:
+      - "5432:5432"
+    networks:
+      - tbaNetwork
+
+
+
+networks:
+  tbaNetwork:
+    name: tbaNetwork
+    driver: bridge
