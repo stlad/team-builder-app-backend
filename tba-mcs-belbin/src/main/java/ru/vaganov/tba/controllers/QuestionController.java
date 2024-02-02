@@ -28,20 +28,17 @@ public class QuestionController {
 
     @GetMapping("/block/{number}")
     public ResponseEntity<BlockQuestionResponseDTO> getBlockByNumber(@PathVariable(value = "number") Long number){
-        log.info(String.format("GET to /questions/block/%d", number));
         BlockQuestionResponseDTO response = belbinService.getBlockByNumber(number);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping("/blank")
     public ResponseEntity<AnswerBlank> getEmptyBlank(){
-        log.info(String.format("GET to /questions/blank"));
         return new ResponseEntity<>(solverService.getAnswerBlank(), HttpStatus.OK);
     }
 
     @PostMapping("/blank")
     public ResponseEntity<ResultBlank> getAnswers(@RequestBody AnswerBlank answerBlank){
-        log.info(String.format("POST to /questions/blank"));
         ResultBlank resultBlank = solverService.getTestResult(answerBlank);
         return new ResponseEntity<>(resultBlank, HttpStatus.OK);
     }

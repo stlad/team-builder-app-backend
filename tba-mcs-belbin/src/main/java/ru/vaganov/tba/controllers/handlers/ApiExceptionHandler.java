@@ -15,14 +15,14 @@ public class ApiExceptionHandler {
 
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<ErrorDTO> handleEntityNotFound(EntityNotFoundException ex){
-        log.error(ex.getMessage());
-        return new ResponseEntity<>(new ErrorDTO(HttpStatus.NOT_FOUND.value(), ex.getMessage()), HttpStatus.NOT_FOUND);
+        log.error(ex.getMessage() + " | " + ex.getClass().getName());
+        return new ResponseEntity<>(new ErrorDTO(HttpStatus.NOT_FOUND.value(), ex.getMessage(), ex.getClass().getName()), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<ErrorDTO> handleEntityNotFound(IllegalArgumentException ex){
-        log.error(ex.getMessage());
-        return new ResponseEntity<>(new ErrorDTO(HttpStatus.BAD_REQUEST.value(), ex.getMessage()), HttpStatus.BAD_REQUEST);
+        log.error(ex.getMessage() + " | " + ex.getClass().getName());
+        return new ResponseEntity<>(new ErrorDTO(HttpStatus.BAD_REQUEST.value(), ex.getMessage(), ex.getClass().getName()), HttpStatus.BAD_REQUEST);
     }
 
 }
@@ -32,4 +32,5 @@ public class ApiExceptionHandler {
 class ErrorDTO{
     private Integer code;
     private String msg;
+    private String error;
 }
