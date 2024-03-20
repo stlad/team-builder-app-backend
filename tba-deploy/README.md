@@ -13,6 +13,7 @@
  psql
  \c teambuilder_db
  create schema belbin;
+ create schema admin;
  ```
  7) Перезапустить все контейнеры ```docker-compose up -d```
 
@@ -22,3 +23,14 @@ ___
 1) Перенсти новую сборку сервиса в соответствующую директорию на сервер. 
 2) ```docker compose build <имя сервиса>```
 3) ```docker-compose up -d```
+
+___
+### Во время разработки
+1. Выполнить ```docker-compose -f docker-compose-dev.yml up```
+2. Создать нужные схемы:
+```
+ psql
+ \c teambuilder_db
+ create schema belbin;
+ create schema admin;
+ ```
