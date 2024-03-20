@@ -3,7 +3,7 @@ name: tba-dev
 
 services:
   tba-database:
-    image: 'postgres'
+    image: 'postgres:15'
     container_name: tba-db-dev
     environment:
       - POSTGRES_DB=teambuilder_db
@@ -17,12 +17,41 @@ services:
       interval: 1s
       timeout: 5s
       retries: 10
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
     networks:
       - tbaNetwork
 
+  tba-keycloak:
+    image: quay.io/keycloak/keycloak:23.0.7
+    container_name: tba-keycloak-dev
+    command: start-dev
+    environment:
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://tba-db-dev:5432/teambuilder_db?currentSchema=keycloak
+      KC_DB_USERNAME: postgres
+      KC_DB_PASSWORD: admin
 
+      KC_HOSTNAME_PORT: 8080
+      KC_HOSTNAME_STRICT: false
+      KC_HOSTNAME_STRICT_HTTPS: false
+
+      KC_LOG_LEVEL: info
+      KC_METRICS_ENABLED: true
+      KC_HEALTH_ENABLED: true
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    depends_on:
+      - tba-database
+    ports:
+      - 8080:8080
+    networks:
+      - tbaNetwork
 
 networks:
   tbaNetwork:
     name: tbaNetwork
     driver: bridge
+
+volumes:
+  postgres_data:
