@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>ru.vaganov.tba</groupId>
 	<artifactId>tba-mcs-belbin-api</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>tba-mcs-belbin-api</name>
 	<description>Belbin test API for TeamBuilderAppp</description>
 	<properties>
@@ -37,22 +37,5 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 
 </project>
