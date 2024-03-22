@@ -12,7 +12,7 @@
 	<artifactId>tba-mcs-belbin</artifactId>
 	<version>0.0.1</version>
 	<name>tba-mcs-belbin</name>
-	<description>Belbin test microservice for TeamBulderApp</description>
+	<description>Belbin test microservice for TeamBuilderApp</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
