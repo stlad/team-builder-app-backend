@@ -1,4 +1,4 @@
-package ru.vaganov.tba;
+package ru.vaganov.tba.dto;
 
 import lombok.*;
 
