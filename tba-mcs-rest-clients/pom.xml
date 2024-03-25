@@ -18,5 +18,6 @@
 
 	<modules>
 		<module>tba-mcs-belbin-api</module>
+		<module>tba-mcs-admin-api</module>
 	</modules>
 </project>
