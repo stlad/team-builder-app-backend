@@ -8,9 +8,9 @@ import ru.vaganov.tba.models.HardRole;
 
 @Data @Builder
 @AllArgsConstructor @NoArgsConstructor
-public class RoleResultDTO {
+public class RoleResultShortDTO {
     private Long id;
     private Long userId;
-    private HardRole hardRole;
+    private Long hardRoleId;
     private Integer position;
 }

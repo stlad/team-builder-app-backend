@@ -8,6 +8,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.vaganov.tba.AdminApiClient;
 import ru.vaganov.tba.dto.UserExternalDTO;
+import ru.vaganov.tba.models.dto.RoleResultDTO;
+import ru.vaganov.tba.models.dto.RoleResultShortDTO;
+import ru.vaganov.tba.service.HardRolesService;
+
+import java.util.List;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -18,6 +23,15 @@ public class ResultController {
 
     @Autowired
     private AdminApiClient adminApiClient;
+
+    @Autowired
+    private HardRolesService hardRolesService;
+
+    @PostMapping("/")
+    public ResponseEntity<List<RoleResultDTO>> addResult(@RequestBody List<RoleResultShortDTO> dtos){
+        List<RoleResultDTO> resultDTOS = hardRolesService.addResults(dtos);
+        return new ResponseEntity<>(resultDTOS, HttpStatus.OK);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<UserExternalDTO> getUserFromApi(@PathVariable Long id){

@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import ru.vaganov.tba.exceptions.ValidationException;
 
 @RestControllerAdvice
 @Slf4j
@@ -21,6 +22,12 @@ public class ApiExceptionHandler {
 
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<ErrorDTO> handleEntityNotFound(IllegalArgumentException ex){
+        log.error(ex.getMessage() + " | " + ex.getClass().getName());
+        return new ResponseEntity<>(new ErrorDTO(HttpStatus.BAD_REQUEST.value(), ex.getMessage(), ex.getClass().getName()), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ValidationException.class)
+    public ResponseEntity<ErrorDTO> handleEntityNotFound(ValidationException ex){
         log.error(ex.getMessage() + " | " + ex.getClass().getName());
         return new ResponseEntity<>(new ErrorDTO(HttpStatus.BAD_REQUEST.value(), ex.getMessage(), ex.getClass().getName()), HttpStatus.BAD_REQUEST);
     }
