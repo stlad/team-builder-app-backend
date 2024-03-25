@@ -30,3 +30,7 @@ springdoc:
 belbin:
   host: http://localhost:8090
   context-path: /api/belbin
+
+admin:
+  host: http://localhost:8095
+  context-path: /api/admin
