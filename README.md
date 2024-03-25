@@ -12,11 +12,13 @@ ___
 
 ___
 <br><br>
+
 ## Состав системы
+
 ### Микросервисы:
-1. [tba-mcs-admin](/tba-mcs-admin/README.md): работа с пользователями
-2. [tba-mcs-belbin](/tba-mcs-belbin/README.md): прохождение теста Белбина
-3. [tba-mcs-hardskills](/tba-mcs-hardskills/README.md): указание профессиональных компетенций
+1. [tba-mcs-admin](/tba-mcs-admin/): работа с пользователями
+2. [tba-mcs-belbin](/tba-mcs-belbin/: прохождение теста Белбина
+3. [tba-mcs-hardskills](/tba-mcs-hardskills/): указание профессиональных компетенций
 4. tba-mcs-teams: формирование команд (?????)
    
 ### Библиотеки
