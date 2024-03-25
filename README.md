@@ -17,17 +17,17 @@ ___
 
 ### Микросервисы:
 1. [tba-mcs-admin](/tba-mcs-admin/): работа с пользователями
-2. [tba-mcs-belbin](/tba-mcs-belbin/: прохождение теста Белбина
+2. [tba-mcs-belbin](/tba-mcs-belbin/): прохождение теста Белбина
 3. [tba-mcs-hardskills](/tba-mcs-hardskills/): указание профессиональных компетенций
 4. tba-mcs-teams: формирование команд (?????)
-   
+___   
 ### Библиотеки
 1. [tba-mcs-admin-api](/tba-mcs-rest-clients/tba-mcs-admin-api/): API клиент для связи с сервисом "admin"
 2. [tba-mcs-belbin-api](/tba-mcs-rest-clients/tba-mcs-belbin-api/): API клиент для связи с сервисом "belbin"
-    
+___ 
 ### Развертывание 
 1. [tba-deploy](/tba-deploy/README.md): скрипты по развертыванию окружений через docker-compose
-
+___
 
 <br><br>
 ## Стек
