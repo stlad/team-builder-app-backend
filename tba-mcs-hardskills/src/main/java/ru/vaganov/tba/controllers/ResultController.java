@@ -27,9 +27,10 @@ public class ResultController {
     @Autowired
     private HardRolesService hardRolesService;
 
-    @PostMapping("/")
-    public ResponseEntity<List<RoleResultDTO>> addResult(@RequestBody List<RoleResultShortDTO> dtos){
-        List<RoleResultDTO> resultDTOS = hardRolesService.addResults(dtos);
+    @PostMapping("/{userId}")
+    public ResponseEntity<List<RoleResultDTO>> addResult(
+            @PathVariable Long userId, @RequestBody List<RoleResultShortDTO> dtos){
+        List<RoleResultDTO> resultDTOS = hardRolesService.addResults(dtos, userId);
         return new ResponseEntity<>(resultDTOS, HttpStatus.OK);
     }
 
@@ -38,5 +39,11 @@ public class ResultController {
         UserExternalDTO userExternalDTO = adminApiClient.getUserById(id);
         log.info(userExternalDTO.toString());
         return new ResponseEntity<>(userExternalDTO, HttpStatus.OK);
+    }
+
+    @GetMapping("/user/{id}")
+    public ResponseEntity<List<RoleResultDTO>> getUsersRoles(@PathVariable Long id){
+        List<RoleResultDTO> resultDTOS = hardRolesService.findAllResultsByUser(id);
+        return new ResponseEntity<>(resultDTOS, HttpStatus.OK);
     }
 }

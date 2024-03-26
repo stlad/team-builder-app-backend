@@ -3,6 +3,7 @@ package ru.vaganov.tba.service;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.vaganov.tba.AdminApiClient;
 import ru.vaganov.tba.exceptions.ValidationException;
 import ru.vaganov.tba.mapper.HardRoleMapper;
@@ -42,11 +43,12 @@ public class HardRolesService {
 
     public List<RoleResultDTO> findAllResultsByUser(Long userId){
         List<RoleResult> results = resultRepository.findAllByUserIdAndPositionIn(userId, List.of(1,2,3));
-
         return resultMapper.toDto(results);
     }
 
-    public List<RoleResultDTO> addResults(List<RoleResultShortDTO> dtos){
+    @Transactional
+    public List<RoleResultDTO> addResults(List<RoleResultShortDTO> dtos, Long userId){
+        resultRepository.deleteByUserId(userId);
         return  dtos.stream().map(this::addResult)
                 .collect(Collectors.toList());
     }
@@ -70,4 +72,16 @@ public class HardRolesService {
         result = resultRepository.save(result);
         return resultMapper.toDto(result);
     };
+
+    public HardRoleDTO findRoleByName(String name){
+        HardRole role = hardRoleRepository.findByRusNameOrEngName(name, name)
+                .orElseThrow(()-> new EntityNotFoundException("Cannot find role with name: "+name));
+        return hardRoleMapper.toDto(role);
+    }
+
+    public HardRoleDTO findRoleById(Long id){
+        HardRole role = hardRoleRepository.findById(id)
+                .orElseThrow(()-> new EntityNotFoundException("Cannot find role with id: "+id));
+        return hardRoleMapper.toDto(role);
+    }
 }

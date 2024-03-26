@@ -6,10 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.vaganov.tba.models.dto.HardRoleDTO;
 import ru.vaganov.tba.service.HardRolesService;
 
@@ -28,5 +25,15 @@ public class HardRolesController {
     @GetMapping("/all")
     public ResponseEntity<List<HardRoleDTO>> findAllRoles(){
         return new ResponseEntity<>(hardRolesService.findAllRoles(), HttpStatus.OK);
+    }
+
+    @GetMapping("/id/{id}")
+    public ResponseEntity<HardRoleDTO> findRoleById(@PathVariable Long id){
+        return new ResponseEntity<>(hardRolesService.findRoleById(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/{roleName}")
+    public ResponseEntity<HardRoleDTO> findRoleByName(@PathVariable String roleName){
+        return new ResponseEntity<>(hardRolesService.findRoleByName(roleName), HttpStatus.OK);
     }
 }

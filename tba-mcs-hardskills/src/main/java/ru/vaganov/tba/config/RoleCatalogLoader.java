@@ -44,7 +44,7 @@ public class RoleCatalogLoader {
     }
 
     private void saveHardRole(HardRole role, HardRoleRepository repository){
-        if(repository.findByRusNameOrEngName(role.getRusName(), role.getEngName()).isEmpty()){
+        if(!repository.findByRusNameOrEngName(role.getRusName(), role.getEngName()).isPresent()){
             role = repository.save(role);
             log.info("Saved role: {} with id: {}", role.getEngName(), role.getId());
         }
