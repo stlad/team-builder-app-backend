@@ -47,6 +47,11 @@ public class ResultsService {
         return resultMapper.toDto(resultRepository.save(result));
     }
 
+    public RoleResultDTO findByUserId(Long id){
+        RoleResult result = resultRepository.findByUserId(id).orElseGet(RoleResult::new);
+        return resultMapper.toDto(result);
+    }
+
     public List<HardRoleWithQuotaDTO> getCatalogWithQuotas(){
         return roleRepository.findAll().stream().map(role -> {
             return new HardRoleWithQuotaDTO(roleMapper.toDto(role), getQuotaPerRole(role.getId()), resultRepository.countByHardRole_Id(role.getId()));

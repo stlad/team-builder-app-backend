@@ -12,5 +12,4 @@ public class RoleResultDTO {
     private Long id;
     private Long userId;
     private HardRole hardRole;
-    private Integer position;
 }

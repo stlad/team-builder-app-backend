@@ -38,4 +38,9 @@ public class ResultController {
     public ResponseEntity<RoleResultDTO> saveResult(@RequestBody RoleResultShortDTO dto){
         return new ResponseEntity<>(resultsService.saveResult(dto), HttpStatus.OK);
     }
+
+    @GetMapping("/user/{id}")
+    public ResponseEntity<RoleResultDTO> findByUserId(@PathVariable Long id){
+        return new ResponseEntity<>(resultsService.findByUserId(id),HttpStatus.OK);
+    }
 }
