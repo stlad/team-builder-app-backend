@@ -8,9 +8,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.vaganov.tba.AdminApiClient;
 import ru.vaganov.tba.dto.UserExternalDTO;
+import ru.vaganov.tba.models.dto.HardRoleWithQuotaDTO;
 import ru.vaganov.tba.models.dto.RoleResultDTO;
 import ru.vaganov.tba.models.dto.RoleResultShortDTO;
 import ru.vaganov.tba.service.HardRolesService;
+import ru.vaganov.tba.service.ResultsService;
 
 import java.util.List;
 
@@ -25,25 +27,15 @@ public class ResultController {
     private AdminApiClient adminApiClient;
 
     @Autowired
-    private HardRolesService hardRolesService;
+    private ResultsService resultsService;
 
-    @PostMapping("/{userId}")
-    public ResponseEntity<List<RoleResultDTO>> addResult(
-            @PathVariable Long userId, @RequestBody List<RoleResultShortDTO> dtos){
-        List<RoleResultDTO> resultDTOS = hardRolesService.addResults(dtos, userId);
-        return new ResponseEntity<>(resultDTOS, HttpStatus.OK);
+    @GetMapping("/catalog")
+    public ResponseEntity<List<HardRoleWithQuotaDTO>>getRolesWithQuota(){
+        return new ResponseEntity<>(resultsService.getCatalogWithQuotas(), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<UserExternalDTO> getUserFromApi(@PathVariable Long id){
-        UserExternalDTO userExternalDTO = adminApiClient.getUserById(id);
-        log.info(userExternalDTO.toString());
-        return new ResponseEntity<>(userExternalDTO, HttpStatus.OK);
-    }
-
-    @GetMapping("/user/{id}")
-    public ResponseEntity<List<RoleResultDTO>> getUsersRoles(@PathVariable Long id){
-        List<RoleResultDTO> resultDTOS = hardRolesService.findAllResultsByUser(id);
-        return new ResponseEntity<>(resultDTOS, HttpStatus.OK);
+    @PostMapping("/")
+    public ResponseEntity<RoleResultDTO> saveResult(@RequestBody RoleResultShortDTO dto){
+        return new ResponseEntity<>(resultsService.saveResult(dto), HttpStatus.OK);
     }
 }

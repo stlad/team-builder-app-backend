@@ -13,9 +13,9 @@ import java.util.Optional;
 public interface RoleResultRepository extends JpaRepository<RoleResult, Long> {
 
     Optional<RoleResult> findByUserId(Long userId);
-    List<RoleResult> findAllByUserIdAndPositionIn(Long userId, List<Integer> positions);
-    Optional<RoleResult> findByUserIdAndPosition(Long userId, Integer position);
 
     @Modifying
     void deleteByUserId(Long userId);
+
+    Integer countByHardRole_Id(Long roleId);
 }

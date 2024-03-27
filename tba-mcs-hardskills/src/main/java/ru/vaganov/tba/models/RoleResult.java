@@ -18,6 +18,5 @@ public class RoleResult {
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     private HardRole hardRole;
 
-    private Integer position;
     private Long userId;
 }
