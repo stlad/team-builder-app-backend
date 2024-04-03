@@ -62,4 +62,5 @@ public class BelbinService {
 
         throw new EntityNotFoundException("cannot find role with name: "+roleName);
     }
+
 }
