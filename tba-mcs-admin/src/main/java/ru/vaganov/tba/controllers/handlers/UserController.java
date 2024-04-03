@@ -30,4 +30,10 @@ public class UserController {
         dto = userService.saveUser(dto);
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UserDTO> editUser(@PathVariable Long id, @RequestBody UserDTO dto){
+        return new ResponseEntity<>(userService.updateUser(id, dto), HttpStatus.OK);
+    }
+
 }
