@@ -34,15 +34,71 @@ services:
     networks:
       - tbaNetwork
 
+  tba-mcs-hardskills:
+    image: 'tba-mcs-hardskills:latest'
+    build:
+        context: backend/hardskills
+        dockerfile: Dockerfile
+    container_name: tba-mcs-hardskills
+    depends_on:
+       tba-database:
+        condition: service_healthy
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://tba-db:5432/teambuilder_db
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=admin
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_BELBIN_HOST=tba-mcs-belbin
+      - SPRING_ADMIN_HOST=tba-mcs-admin
+    ports:
+      - 8091:8091
+    networks:
+      - tbaNetwork
 
+  tba-mcs-admin:
+    image: 'tba-mcs-admin:latest'
+    build:
+        context: backend/admin
+        dockerfile: Dockerfile
+    container_name: tba-mcs-admin
+    depends_on:
+       tba-database:
+        condition: service_healthy
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://tba-db:5432/teambuilder_db
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=admin
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_BELBIN_HOST=tba-mcs-belbin
+    ports:
+      - 8095:8095
+    networks:
+      - tbaNetwork
+
+  tba-mcs-teambuilder:
+    image: 'tba-mcs-teambuilder:latest'
+    build:
+        context: teambuilder/admin
+        dockerfile: Dockerfile
+    container_name: tba-mcs-teambuilder
+    depends_on:
+       tba-database:
+        condition: service_healthy
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://tba-db:5432/teambuilder_db
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=admin
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_BELBIN_HOST=tba-mcs-belbin
+      - SPRING_ADMIN_HOST=tba-mcs-admin
+      - SPRING_HARDSKILLS_HOST=tba-mcs-hardskills
+    ports:
+      - 8092:8092
+    networks:
+      - tbaNetwork
 
   tba-database:
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready", "--quiet"]
-      interval: 1s
-      timeout: 5s
-      retries: 10
-    image: 'postgres:14.7-alpine'
+    image: 'postgres:15'
     container_name: tba-db
     environment:
       - POSTGRES_DB=teambuilder_db
@@ -51,6 +107,13 @@ services:
       - POSTGRES_PASSWORD=admin
     ports:
       - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready", "--quiet"]
+      interval: 1s
+      timeout: 5s
+      retries: 10
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
     networks:
       - tbaNetwork
 
@@ -60,3 +123,7 @@ networks:
   tbaNetwork:
     name: tbaNetwork
     driver: bridge
+
+    
+volumes:
+  postgres_data:
