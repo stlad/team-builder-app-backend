@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.vaganov.tba.models.dto.UserResultDTO;
+import ru.vaganov.tba.models.dto.UserResultShortDTO;
 import ru.vaganov.tba.service.SolverService;
 import ru.vaganov.tba.service.UserResultsService;
 
@@ -37,7 +38,7 @@ public class UserResultsController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<UserResultDTO>> getAllResults(){
+    public ResponseEntity<List<UserResultShortDTO>> getAllResults(){
         return new ResponseEntity<>(userResultsService.getAllResults(), HttpStatus.OK);
     }
 }

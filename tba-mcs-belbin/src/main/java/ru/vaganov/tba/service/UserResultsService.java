@@ -8,6 +8,7 @@ import ru.vaganov.tba.models.BelbinRole;
 import ru.vaganov.tba.models.UserResult;
 import ru.vaganov.tba.models.dto.BelbinRoleDTO;
 import ru.vaganov.tba.models.dto.UserResultDTO;
+import ru.vaganov.tba.models.dto.UserResultShortDTO;
 import ru.vaganov.tba.repositories.BelbinRoleRepository;
 import ru.vaganov.tba.repositories.UserResultsRepository;
 
@@ -35,8 +36,8 @@ public class UserResultsService {
         return resultMapper.toDto(result);
     }
 
-    public List<UserResultDTO> getAllResults(){
-        return resultMapper.toDto(resultsRepository.findAll());
+    public List<UserResultShortDTO> getAllResults(){
+        return resultMapper.toShortDtos(resultsRepository.findAll());
     }
 }
 
