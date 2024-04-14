@@ -24,9 +24,6 @@ import java.util.List;
 public class ResultController {
 
     @Autowired
-    private AdminApiClient adminApiClient;
-
-    @Autowired
     private ResultsService resultsService;
 
     @GetMapping("/catalog")
@@ -42,5 +39,10 @@ public class ResultController {
     @GetMapping("/user/{id}")
     public ResponseEntity<RoleResultDTO> findByUserId(@PathVariable Long id){
         return new ResponseEntity<>(resultsService.findByUserId(id),HttpStatus.OK);
+    }
+
+    @GetMapping("/")
+    public ResponseEntity<List<RoleResultShortDTO>> getAllResults(){
+        return new ResponseEntity<>(resultsService.getAllUserResults(), HttpStatus.OK);
     }
 }

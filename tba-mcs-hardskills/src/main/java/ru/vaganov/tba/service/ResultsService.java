@@ -65,4 +65,8 @@ public class ResultsService {
     private Integer getVacationsLeftPerRole(Long roleID){
         return getQuotaPerRole(roleID) - resultRepository.countByHardRole_Id(roleID);
     }
+
+    public List<RoleResultShortDTO> getAllUserResults(){
+        return resultMapper.toShortDtos(resultRepository.findAll());
+    }
 }
