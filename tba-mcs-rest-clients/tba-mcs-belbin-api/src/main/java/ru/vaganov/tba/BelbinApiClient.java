@@ -86,4 +86,24 @@ public class BelbinApiClient {
             return  null;
         }
     }
+    public BelbinRoleResultDTO getUserResultById(Long userId){
+        RestTemplate restTemplate = new RestTemplate();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Accept", "application/json");
+
+        Map<String, String> vars = new HashMap<>();
+        vars.put("userId", userId.toString());
+
+        try {
+            var resp = restTemplate.exchange(host +contextPath+"/results/{userId}",
+                    HttpMethod.GET,
+                    new HttpEntity<>(headers),
+                    BelbinRoleResultDTO.class,vars);
+
+            return resp.getBody();
+        }catch (Exception ex){
+            return  null;
+        }
+    }
 }
