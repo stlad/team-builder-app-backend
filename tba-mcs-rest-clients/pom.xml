@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>ru.vaganov.tba</groupId>
 	<artifactId>tba-mcs-rest-clients</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>tba-mcs-rest-clients</name>
 	<description>Rest Clients for TeamBuilderApp</description>
 	<packaging>pom</packaging>
@@ -19,5 +19,6 @@
 	<modules>
 		<module>tba-mcs-belbin-api</module>
 		<module>tba-mcs-admin-api</module>
+		<module>tba-mcs-hardskills-api</module>
 	</modules>
 </project>
