@@ -63,4 +63,8 @@ public class BelbinService {
         throw new EntityNotFoundException("cannot find role with name: "+roleName);
     }
 
+    public BelbinRoleDTO getRoleById(Long id){
+        BelbinRole role = belbinRoleRepository.findById(id).orElseThrow(()->new EntityNotFoundException("cannot find role with id: "+id));
+        return roleMapper.toDto(role);
+    }
 }

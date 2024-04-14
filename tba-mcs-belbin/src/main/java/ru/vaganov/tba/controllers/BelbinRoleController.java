@@ -27,4 +27,9 @@ public class BelbinRoleController {
         BelbinRoleDTO dto = belbinService.getBelbinRoleByName(roleName);
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
+
+    @GetMapping("/id/{id}")
+    public ResponseEntity<BelbinRoleDTO> getRoleById(@PathVariable(value = "id") Long id){
+        return new ResponseEntity<>(belbinService.getRoleById(id), HttpStatus.OK);
+    }
 }
