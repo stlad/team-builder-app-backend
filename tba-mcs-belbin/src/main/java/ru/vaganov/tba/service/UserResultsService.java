@@ -11,6 +11,8 @@ import ru.vaganov.tba.models.dto.UserResultDTO;
 import ru.vaganov.tba.repositories.BelbinRoleRepository;
 import ru.vaganov.tba.repositories.UserResultsRepository;
 
+import java.util.List;
+
 @Service
 public class UserResultsService {
 
@@ -31,6 +33,10 @@ public class UserResultsService {
     public UserResultDTO getResult(Long userId){
         UserResult result = resultsRepository.findByUserId(userId).orElseGet(()-> UserResult.builder().userId(userId).build());
         return resultMapper.toDto(result);
+    }
+
+    public List<UserResultDTO> getAllResults(){
+        return resultMapper.toDto(resultsRepository.findAll());
     }
 }
 

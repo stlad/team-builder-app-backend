@@ -10,6 +10,8 @@ import ru.vaganov.tba.models.dto.UserResultDTO;
 import ru.vaganov.tba.service.SolverService;
 import ru.vaganov.tba.service.UserResultsService;
 
+import java.util.List;
+
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -32,5 +34,10 @@ public class UserResultsController {
     @GetMapping("{userId}")
     public  ResponseEntity<UserResultDTO> getResult(@PathVariable Long userId){
         return new ResponseEntity<>(userResultsService.getResult(userId), HttpStatus.OK);
+    }
+
+    @GetMapping("/")
+    public ResponseEntity<List<UserResultDTO>> getAllResults(){
+        return new ResponseEntity<>(userResultsService.getAllResults(), HttpStatus.OK);
     }
 }
