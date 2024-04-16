@@ -5,17 +5,22 @@
 2) Собрать клиент-приложение с помощью ```npm start build```. Поместить полученную директорию build в директорию frontend/
 3) Установить docker на сервер
 4) Перенести всю директорию tba-deploy на удаленный сервер
-5) Перейти в директорию tba-deploy и использовать команду ```docker-compose up --build```
+5) Перейти в директорию tba-deploy и использовать команду ```docker compose up --build```
 
-6) При первом запуске, в контейнере tba-db необходимо создать схему belbin:
+6) При первом запуске, в контейнере tba-db необходимо создать схемы:
  <br>Через терминал контейнера:<br> 
  ```
+ sudo docker start tba-db
+ docker exec -it tba-db bash
+
  psql
  \c teambuilder_db
  create schema belbin;
  create schema admin;
+ create schema hardskills;
+ create schema teambuilder;
  ```
- 7) Перезапустить все контейнеры ```docker-compose up -d```
+ 7) Перезапустить все контейнеры ```docker compose up -d```
 
 
 ___
@@ -23,14 +28,3 @@ ___
 1) Перенсти новую сборку сервиса в соответствующую директорию на сервер. 
 2) ```docker compose build <имя сервиса>```
 3) ```docker-compose up -d```
-
-___
-### Во время разработки
-1. Выполнить ```docker-compose -f docker-compose-dev.yml up```
-2. Создать нужные схемы:
-```
- psql
- \c teambuilder_db
- create schema belbin;
- create schema admin;
- ```

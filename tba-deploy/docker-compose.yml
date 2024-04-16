@@ -70,6 +70,7 @@ services:
       - SPRING_DATASOURCE_PASSWORD=admin
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
       - SPRING_BELBIN_HOST=tba-mcs-belbin
+      - SPRING_HARDSKILLS_HOST=tba-mcs-hardskills
     ports:
       - 8095:8095
     networks:
@@ -78,7 +79,7 @@ services:
   tba-mcs-teambuilder:
     image: 'tba-mcs-teambuilder:latest'
     build:
-        context: teambuilder/admin
+        context: backend/teambuilder
         dockerfile: Dockerfile
     container_name: tba-mcs-teambuilder
     depends_on:
