@@ -1,4 +1,4 @@
-package ru.vaganov.tba;
+package ru.vaganov.tba.repositories;
 
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,6 +17,8 @@ public interface UserResultsRepository extends JpaRepository<UserFullResult, Lon
 
     @Query("SELECT distinct u.profRoleId from UserFullResult u")
     List<Long> findAllProfRoles();
+
+    List<UserFullResult> findAllByTeam_Id(Long teamId);
 
     @Transactional
     default Map<Long, List<UserFullResult>> findAllGroupedByProfRole() {

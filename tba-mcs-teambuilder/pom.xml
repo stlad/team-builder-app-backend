@@ -55,6 +55,17 @@
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
 			<version>2.2.0</version>
 		</dependency>
+
+		<dependency>
+			<groupId>ru.vaganov.tba</groupId>
+			<artifactId>tba-mcs-belbin-api</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>ru.vaganov.tba</groupId>
+			<artifactId>tba-mcs-hardskills-api</artifactId>
+			<version>0.0.1</version>
+		</dependency>
 	</dependencies>
 
 	<build>
