@@ -3,6 +3,7 @@ package ru.vaganov.tba.service;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.vaganov.tba.mapper.UserMapper;
 import ru.vaganov.tba.models.User;
@@ -19,11 +20,15 @@ public class UserService {
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private PasswordEncoder encoder;
 
     public UserDTO saveUser(UserDTO dto){
         User user = userMapper.fromDto(dto);
         if(dto.getId() == null || !userRepository.existsById(dto.getId()))
             user.setDateRegister(LocalDateTime.now());
+
+        user.setPassword(encoder.encode(dto.getPassword()));
         return userMapper.toDto(userRepository.save(user));
     }
 

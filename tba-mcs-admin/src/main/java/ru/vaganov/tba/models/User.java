@@ -25,4 +25,12 @@ public class User {
     private String lastname;
     private String middlename;
 
+    @Column(unique=true)
+    private String email;
+
+    private String password;
+
+    @Column(length = 32, columnDefinition = "varchar(32) default 'STUDENT'")
+    @Enumerated(value = EnumType.STRING)
+    private SystemRoles systemRole;
 }

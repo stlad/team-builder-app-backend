@@ -25,6 +25,12 @@ public class ApiExceptionHandler {
         return new ResponseEntity<>(new ErrorDTO(HttpStatus.BAD_REQUEST.value(), ex.getMessage(), ex.getClass().getName()), HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(SecurityException.class)
+    public ResponseEntity<ErrorDTO> handleSecurityException(SecurityException ex){
+        log.error(ex.getMessage() + " | " + ex.getClass().getName());
+        return new ResponseEntity<>(new ErrorDTO(HttpStatus.FORBIDDEN.value(), ex.getMessage(), ex.getClass().getName()), HttpStatus.BAD_REQUEST);
+    }
+
 }
 
 @Data

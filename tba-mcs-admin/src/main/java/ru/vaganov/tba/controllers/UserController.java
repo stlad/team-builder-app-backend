@@ -1,4 +1,4 @@
-package ru.vaganov.tba.controllers.handlers;
+package ru.vaganov.tba.controllers;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
