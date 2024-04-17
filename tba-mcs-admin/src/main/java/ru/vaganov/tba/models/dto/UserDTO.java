@@ -23,5 +23,5 @@ public class UserDTO {
 
     private String password;
 
-    private SystemRoles role;
+    private SystemRoles systemRole;
 }

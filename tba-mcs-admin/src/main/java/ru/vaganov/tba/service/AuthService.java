@@ -26,7 +26,7 @@ public class AuthService {
         String email = request.getEmail();
         User user = userRepository.findByEmail(email).orElseThrow(()-> new EntityNotFoundException("Cannot find user with email: "+email));
 
-        if(encoder.matches(request.getPassword(), user.getPassword())){
+        if(!encoder.matches(request.getPassword(), user.getPassword())){
             throw new SecurityException("Wrong Password");
         }
         return mapper.toDto(user);
