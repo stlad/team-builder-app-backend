@@ -1,5 +1,6 @@
 package ru.vaganov.tba.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +22,13 @@ public class AuthController {
     private AuthService authService;
 
 
+    @Operation(summary = "Авторизация", description = "Логин")
     @PostMapping("/login")
     public ResponseEntity<UserDTO> login(@RequestBody UserDTO dto){
         return new ResponseEntity<>(authService.login(dto), HttpStatus.OK);
     }
 
+    @Operation(summary = "Регистрация", description = "Регистрация")
     @PostMapping("/register")
     public ResponseEntity<UserDTO> register(@RequestBody UserDTO dto){
         return new ResponseEntity<>(authService.register(dto), HttpStatus.OK);
