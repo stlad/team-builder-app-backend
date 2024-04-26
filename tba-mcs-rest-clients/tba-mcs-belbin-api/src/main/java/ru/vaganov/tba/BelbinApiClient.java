@@ -96,7 +96,7 @@ public class BelbinApiClient {
         vars.put("userId", userId.toString());
 
         try {
-            var resp = restTemplate.exchange(host +contextPath+"/results/{userId}",
+            var resp = restTemplate.exchange(host +contextPath+"/results/{userId}/short",
                     HttpMethod.GET,
                     new HttpEntity<>(headers),
                     BelbinRoleResultDTO.class,vars);

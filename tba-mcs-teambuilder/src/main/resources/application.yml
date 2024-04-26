@@ -5,7 +5,7 @@ server:
 
 spring:
   datasource:
-    url : jdbc:postgresql://localhost:6543/teambuilder_db
+    url : jdbc:postgresql://localhost:5432/teambuilder_db
     username : postgres
     password : admin
 
@@ -28,8 +28,8 @@ springdoc:
 
 
 belbin:
-  host: localhost:8090
+  host: http://localhost:8090
   context-path: /api/belbin
 hardskills:
-  host: localhost:8091
+  host: http://localhost:8091
   context-path: /api/hardskills

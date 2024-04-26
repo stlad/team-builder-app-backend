@@ -26,6 +26,7 @@ public class TeambuildingService {
     private TeamReaperNest teamReaperNest;
 
     public void buildTeams(){
+        prepareAllResults();
         teamReaperNest.Reap();
     }
 
@@ -38,7 +39,7 @@ public class TeambuildingService {
             var userResult = new UserFullResult();
             userResult.setUserId(profResult.getUserId());
             userResult.setTeamRoleId(belbinResult.getRoleId());
-            userResult.setProfRoleId(profResult.getRoleId());
+            userResult.setProfRoleId(profResult.getHardRoleId());
 
             preparedResults.add(userResult);
         }

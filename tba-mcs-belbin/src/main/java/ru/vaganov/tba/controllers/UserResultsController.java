@@ -45,4 +45,10 @@ public class UserResultsController {
     public ResponseEntity<List<UserResultShortDTO>> getAllResults(){
         return new ResponseEntity<>(userResultsService.getAllResults(), HttpStatus.OK);
     }
+
+    @Operation(summary = "Получение результата для пользователя", description = "Получение результата для пользователя по его ID")
+    @GetMapping("/{userId}/short")
+    public  ResponseEntity<UserResultShortDTO> getResultShort(@PathVariable Long userId){
+        return new ResponseEntity<>(userResultsService.getResultShort(userId), HttpStatus.OK);
+    }
 }

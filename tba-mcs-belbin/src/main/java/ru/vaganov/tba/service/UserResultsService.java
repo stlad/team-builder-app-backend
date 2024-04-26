@@ -36,6 +36,11 @@ public class UserResultsService {
         return resultMapper.toDto(result);
     }
 
+    public UserResultShortDTO getResultShort(Long userId){
+        UserResult result = resultsRepository.findByUserId(userId).orElseGet(()-> UserResult.builder().userId(userId).build());
+        return resultMapper.toShortDto(result);
+    }
+
     public List<UserResultShortDTO> getAllResults(){
         return resultMapper.toShortDtos(resultsRepository.findAll());
     }

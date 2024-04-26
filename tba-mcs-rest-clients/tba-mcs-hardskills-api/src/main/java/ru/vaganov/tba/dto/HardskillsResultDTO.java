@@ -7,5 +7,5 @@ public class HardskillsResultDTO {
 
     private Long id;
     private Long userId;
-    private Long roleId;
+    private Long hardRoleId;
 }

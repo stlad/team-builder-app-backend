@@ -106,6 +106,7 @@ services:
       - POSTGRES_USER=postgres
       - PGUSER=postgres
       - POSTGRES_PASSWORD=admin
+      - PGDATA=/var/lib/postgresql/data/
     ports:
       - "5432:5432"
     healthcheck:
@@ -114,7 +115,7 @@ services:
       timeout: 5s
       retries: 10
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data/:rw
     networks:
       - tbaNetwork
 
