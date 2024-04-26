@@ -11,6 +11,7 @@ import ru.vaganov.tba.models.dto.UserDTO;
 import ru.vaganov.tba.repositories.UserRepository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service @Slf4j
 public class UserService {
@@ -47,4 +48,7 @@ public class UserService {
 
     }
 
+    public List<UserDTO> findUsersByIds(List<Long> ids){
+        return userMapper.toDto(userRepository.findAllByIdIn(ids));
+    }
 }

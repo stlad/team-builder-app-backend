@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import ru.vaganov.tba.models.dto.UserDTO;
 import ru.vaganov.tba.service.UserService;
 
+import java.util.List;
+
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/users")
@@ -40,4 +42,9 @@ public class UserController {
         return new ResponseEntity<>(userService.updateUser(id, dto), HttpStatus.OK);
     }
 
+    @Operation(summary = "Поиск списка пользователей по их id", description = "Поиск списка пользователей по их id")
+    @PostMapping("/ids")
+    public ResponseEntity<List<UserDTO>> editUser(@RequestBody List<Long> ids){
+        return new ResponseEntity<>(userService.findUsersByIds(ids), HttpStatus.OK);
+    }
 }
