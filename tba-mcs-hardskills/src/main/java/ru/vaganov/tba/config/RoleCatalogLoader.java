@@ -16,27 +16,19 @@ public class RoleCatalogLoader {
         return args -> {
             log.info("Loading Hard Role Catalog...");
             saveHardRole(HardRole.builder()
-                    .industry(HardRole.Industry.IT).rusName("бэкенд-разработчик").engName("backend-developer")
+                    .industry(HardRole.Industry.IT).rusName("Бэкенд-разработчик").engName("Backend-developer")
                     .build(), repository);
 
             saveHardRole(HardRole.builder()
-                    .industry(HardRole.Industry.IT).rusName("фронтенд-разработчик").engName("frontend-developer")
+                    .industry(HardRole.Industry.IT).rusName("Фронтенд-разработчик").engName("Frontend-developer")
                     .build(), repository);
 
             saveHardRole(HardRole.builder()
-                    .industry(HardRole.Industry.IT).rusName("дизайнер интерфейсов").engName("ui designer")
+                    .industry(HardRole.Industry.IT).rusName("Дизайнер").engName("Designer")
                     .build(), repository);
 
             saveHardRole(HardRole.builder()
-                    .industry(HardRole.Industry.IT).rusName("системный аналитик").engName("system analyst")
-                    .build(), repository);
-
-            saveHardRole(HardRole.builder()
-                    .industry(HardRole.Industry.IT).rusName("бизнес аналитик").engName("business analyst")
-                    .build(), repository);
-
-            saveHardRole(HardRole.builder()
-                    .industry(HardRole.Industry.IT).rusName("тестировщик").engName("qa-engineer")
+                    .industry(HardRole.Industry.IT).rusName("Аналитик").engName("Analyst")
                     .build(), repository);
 
             log.info("Hard Role Catalog loaded...");
