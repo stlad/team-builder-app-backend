@@ -55,4 +55,8 @@ public class UserService {
     public Long countAll(){
         return userRepository.count();
     }
+
+    public List<UserDTO> findAll(){
+        return userMapper.toDto(userRepository.findAll());
+    }
 }

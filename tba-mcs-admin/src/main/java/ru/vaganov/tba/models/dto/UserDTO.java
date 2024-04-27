@@ -20,6 +20,7 @@ public class UserDTO {
     private String lastname;
     private String middlename;
     private String email;
+    private String academicGroup;
 
     private String password;
 

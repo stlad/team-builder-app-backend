@@ -53,4 +53,10 @@ public class UserController {
     public ResponseEntity<Long> countUser(){
         return new ResponseEntity<>(userService.countAll(), HttpStatus.OK);
     }
+
+    @Operation(summary = "Найти всех пользователей", description = "Найти всех пользователей")
+    @GetMapping("/all")
+    public ResponseEntity<List<UserDTO>> getAllUsers(){
+        return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
+    }
 }

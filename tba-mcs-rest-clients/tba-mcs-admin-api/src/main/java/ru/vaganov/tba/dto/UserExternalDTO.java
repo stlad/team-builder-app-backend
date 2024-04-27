@@ -17,4 +17,5 @@ public class UserExternalDTO {
     private String firstname;
     private String lastname;
     private String middlename;
+    private String academicGroup;
 }

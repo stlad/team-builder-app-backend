@@ -24,6 +24,7 @@ public class User {
     private String firstname;
     private String lastname;
     private String middlename;
+    private String academicGroup;
 
     @Column(unique=true)
     private String email;
