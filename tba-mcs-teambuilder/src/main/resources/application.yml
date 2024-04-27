@@ -33,3 +33,6 @@ belbin:
 hardskills:
   host: http://localhost:8091
   context-path: /api/hardskills
+admin:
+  host: http://localhost:8095
+  context-path: /api/admin

@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.vaganov.tba.model.UserFullResult;
+import ru.vaganov.tba.model.dto.TeamFullDTO;
 import ru.vaganov.tba.service.TeambuildingService;
 import ru.vaganov.tba.service.TeamsService;
 
@@ -29,5 +30,10 @@ public class TeamsController {
     @GetMapping("/{teamId}")
     public ResponseEntity<List<UserFullResult>> buildCommands(@PathVariable Long teamId){
         return new ResponseEntity<>(teamsService.getMembersByTeamId(teamId), HttpStatus.OK);
+    }
+
+    @GetMapping("/{teamId}/full")
+    public ResponseEntity<TeamFullDTO> getFullTeams(@PathVariable Long teamId){
+        return new ResponseEntity<>(teamsService.getTeamFullDTO(teamId), HttpStatus.OK);
     }
 }

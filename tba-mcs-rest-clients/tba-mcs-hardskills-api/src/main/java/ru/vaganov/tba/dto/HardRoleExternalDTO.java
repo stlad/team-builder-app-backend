@@ -1,5 +1,12 @@
 package ru.vaganov.tba.dto;
 
+import lombok.*;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
 public class HardRoleExternalDTO {
 
     private Long id;
