@@ -4,6 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.vaganov.tba.AdminApiClient;
 import ru.vaganov.tba.exceptions.ValidationException;
 import ru.vaganov.tba.mapper.HardRoleMapper;
 import ru.vaganov.tba.mapper.RoleResultMapper;
@@ -29,6 +30,8 @@ public class ResultsService {
     private HardRoleRepository roleRepository;
     @Autowired
     private HardRoleMapper roleMapper;
+    @Autowired
+    private AdminApiClient adminApiClient;
 
     private final Integer QUOTA_PER_ROLE = 5;
 
@@ -59,7 +62,11 @@ public class ResultsService {
     }
 
     private Integer getQuotaPerRole(Long roleId){
-        return QUOTA_PER_ROLE;
+        Long countUser = adminApiClient.countUser();
+        Long countRoles = roleRepository.count();
+
+
+        return (int) ((countUser + countRoles - 1) / countRoles);
     }
 
     private Integer getVacationsLeftPerRole(Long roleID){

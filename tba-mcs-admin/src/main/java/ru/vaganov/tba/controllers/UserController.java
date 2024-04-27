@@ -47,4 +47,10 @@ public class UserController {
     public ResponseEntity<List<UserDTO>> editUser(@RequestBody List<Long> ids){
         return new ResponseEntity<>(userService.findUsersByIds(ids), HttpStatus.OK);
     }
+
+    @Operation(summary = "Количество активных студентов", description = "Кол-во студентов")
+    @GetMapping("/count")
+    public ResponseEntity<Long> countUser(){
+        return new ResponseEntity<>(userService.countAll(), HttpStatus.OK);
+    }
 }

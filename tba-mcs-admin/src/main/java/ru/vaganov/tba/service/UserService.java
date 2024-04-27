@@ -51,4 +51,8 @@ public class UserService {
     public List<UserDTO> findUsersByIds(List<Long> ids){
         return userMapper.toDto(userRepository.findAllByIdIn(ids));
     }
+
+    public Long countAll(){
+        return userRepository.count();
+    }
 }

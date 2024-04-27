@@ -42,4 +42,24 @@ public class AdminApiClient {
             return  null;
         }
     }
+
+    public Long countUser(){
+        RestTemplate restTemplate = new RestTemplate();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Accept", "application/json");
+
+        Map<String, String> vars = new HashMap<>();
+
+        try {
+            var resp = restTemplate.exchange(host +contextPath+"/users/count",
+                    HttpMethod.GET,
+                    new HttpEntity<>(headers),
+                    Long.class,vars);
+
+            return resp.getBody();
+        }catch (Exception ex){
+            return  null;
+        }
+    }
 }
