@@ -16,7 +16,8 @@ public class UserFullDTO {
     private String firstname;
     private String lastname;
     private String middlename;
-    private String group;
+    private String academicGroup;
+    private Long teamId;
 
     private BelbinRoleExternalDTO teamRole;
     private HardRoleExternalDTO profRole;

@@ -27,4 +27,5 @@ public interface UserResultsRepository extends JpaRepository<UserFullResult, Lon
                 .collect(Collectors.toMap(r->r, this::findAllByProfRoleId));
     }
 
+    List<UserFullResult> findAllByUserIdIn(List<Long> ids);
 }

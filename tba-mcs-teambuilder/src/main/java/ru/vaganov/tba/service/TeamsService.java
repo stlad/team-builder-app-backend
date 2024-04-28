@@ -3,6 +3,8 @@ package ru.vaganov.tba.service;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.vaganov.tba.AdminApiClient;
+import ru.vaganov.tba.dto.UserExternalDTO;
 import ru.vaganov.tba.mapper.UserMapperImpl;
 import ru.vaganov.tba.model.Team;
 import ru.vaganov.tba.model.UserFullResult;
@@ -11,13 +13,16 @@ import ru.vaganov.tba.model.dto.UserFullDTO;
 import ru.vaganov.tba.repositories.TeamRepository;
 import ru.vaganov.tba.repositories.UserResultsRepository;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TeamsService {
     @Autowired
     private UserResultsRepository userResultsRepository;
-
+    @Autowired
+    private AdminApiClient adminApiClient;
     @Autowired
     private UserMapperImpl userMapper;
     @Autowired
@@ -41,5 +46,12 @@ public class TeamsService {
         teamFullDTO.setAttachedProject(team.getAttachedProject());
         teamFullDTO.setMembers(fullDTOS);
         return teamFullDTO;
+    }
+
+    public List<UserFullDTO> findAllUsersWithRoles(){
+         var ids = Arrays.stream(adminApiClient.getAllUsers()).map(UserExternalDTO::getId).toList();
+         List<UserFullResult> userFullResults = userResultsRepository.findAllByUserIdIn(ids);
+         List<UserFullDTO> fullDTOS = userMapper.toUsserFullDTOs(userFullResults);
+        return fullDTOS;
     }
 }

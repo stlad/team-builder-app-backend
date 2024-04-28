@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.vaganov.tba.model.UserFullResult;
 import ru.vaganov.tba.model.dto.TeamFullDTO;
+import ru.vaganov.tba.model.dto.UserFullDTO;
 import ru.vaganov.tba.service.TeambuildingService;
 import ru.vaganov.tba.service.TeamsService;
 
@@ -35,5 +36,10 @@ public class TeamsController {
     @GetMapping("/{teamId}/full")
     public ResponseEntity<TeamFullDTO> getFullTeams(@PathVariable Long teamId){
         return new ResponseEntity<>(teamsService.getTeamFullDTO(teamId), HttpStatus.OK);
+    }
+
+    @GetMapping("/users/all")
+    public ResponseEntity<List<UserFullDTO>> getAllUsersWithRoles(){
+        return new ResponseEntity<>(teamsService.findAllUsersWithRoles(), HttpStatus.OK);
     }
 }

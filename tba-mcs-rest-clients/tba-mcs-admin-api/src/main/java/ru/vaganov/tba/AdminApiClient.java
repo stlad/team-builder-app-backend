@@ -10,6 +10,7 @@ import org.springframework.web.client.RestTemplate;
 import ru.vaganov.tba.dto.UserExternalDTO;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Component
@@ -56,6 +57,26 @@ public class AdminApiClient {
                     HttpMethod.GET,
                     new HttpEntity<>(headers),
                     Long.class,vars);
+
+            return resp.getBody();
+        }catch (Exception ex){
+            return  null;
+        }
+    }
+
+    public UserExternalDTO[] getAllUsers(){
+        RestTemplate restTemplate = new RestTemplate();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Accept", "application/json");
+
+        Map<String, String> vars = new HashMap<>();
+
+        try {
+            var resp = restTemplate.exchange(host +contextPath+"/users/all",
+                    HttpMethod.GET,
+                    new HttpEntity<>(headers),
+                    UserExternalDTO[].class,vars);
 
             return resp.getBody();
         }catch (Exception ex){

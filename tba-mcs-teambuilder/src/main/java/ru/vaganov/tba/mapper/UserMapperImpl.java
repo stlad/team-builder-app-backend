@@ -32,8 +32,10 @@ public class UserMapperImpl {
         dto.setFirstname(userDTO.getFirstname());
         dto.setLastname(userDTO.getLastname());
         dto.setDateRegister(userDTO.getDateRegister());
+        dto.setAcademicGroup(userDTO.getAcademicGroup());
         dto.setProfRole(hardRoleExternalDTO);
         dto.setTeamRole(belbinRoleExternalDTO);
+        dto.setTeamId(entity.getTeam() == null ? null : entity.getTeam().getId());
         return dto;
     }
 
