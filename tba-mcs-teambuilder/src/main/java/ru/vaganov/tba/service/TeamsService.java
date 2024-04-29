@@ -54,4 +54,12 @@ public class TeamsService {
          List<UserFullDTO> fullDTOS = userMapper.toUsserFullDTOs(userFullResults);
         return fullDTOS;
     }
+
+    public TeamFullDTO getTeamByUserId(Long userId){
+        UserFullResult result = userResultsRepository.findByUserId(userId)
+                .orElseThrow(()-> new EntityNotFoundException("Cannot find user with id: "+userId));
+        if(result.getTeam() == null)
+            return null;
+        return getTeamFullDTO(result.getTeam().getId());
+    }
 }

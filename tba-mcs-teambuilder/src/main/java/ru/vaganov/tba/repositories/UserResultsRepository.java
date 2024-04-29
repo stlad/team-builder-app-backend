@@ -8,6 +8,7 @@ import ru.vaganov.tba.model.UserFullResult;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
@@ -28,4 +29,5 @@ public interface UserResultsRepository extends JpaRepository<UserFullResult, Lon
     }
 
     List<UserFullResult> findAllByUserIdIn(List<Long> ids);
+    Optional<UserFullResult> findByUserId(Long id);
 }

@@ -1,6 +1,7 @@
 package ru.vaganov.tba.controllers;
 
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +42,11 @@ public class TeamsController {
     @GetMapping("/users/all")
     public ResponseEntity<List<UserFullDTO>> getAllUsersWithRoles(){
         return new ResponseEntity<>(teamsService.findAllUsersWithRoles(), HttpStatus.OK);
+    }
+
+    @Operation(description = "Получить всю команду по id пользователя", summary = "Получить всю команду по id пользователя")
+    @GetMapping("/users/{id}")
+    public ResponseEntity<TeamFullDTO> getUsersTeam(@PathVariable Long id){
+        return new ResponseEntity<>(teamsService.getTeamByUserId(id), HttpStatus.OK);
     }
 }
