@@ -30,7 +30,7 @@ public class TeamsController {
 
 
     @GetMapping("/{teamId}")
-    public ResponseEntity<List<UserFullResult>> buildCommands(@PathVariable Long teamId){
+    public ResponseEntity<List<UserFullResult>> getMembersOfTeam(@PathVariable Long teamId){
         return new ResponseEntity<>(teamsService.getMembersByTeamId(teamId), HttpStatus.OK);
     }
 
@@ -48,5 +48,17 @@ public class TeamsController {
     @GetMapping("/users/{id}")
     public ResponseEntity<TeamFullDTO> getUsersTeam(@PathVariable Long id){
         return new ResponseEntity<>(teamsService.getTeamByUserId(id), HttpStatus.OK);
+    }
+
+    @Operation(description = "Получить все команды", summary = "Получить все команды")
+    @GetMapping("/all")
+    public ResponseEntity<List<TeamFullDTO>> getAllTeams(){
+        return new ResponseEntity<>(teamsService.findAllTeams(), HttpStatus.OK);
+    }
+
+    @Operation(description = "Получить идентификаторы всех команд", summary = "Получить id всех команд")
+    @GetMapping("/ids")
+    public ResponseEntity<List<Long>> getAllTeamsIds(){
+        return new ResponseEntity<>(teamsService.getTeamsIds(), HttpStatus.OK);
     }
 }

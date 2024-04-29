@@ -22,7 +22,7 @@ public class TeamBuilderController {
     private TeambuildingService teambuildingService;
 
 
-    @GetMapping("/")
+    @GetMapping("/start")
     public ResponseEntity<String> buildCommands(){
         teambuildingService.buildTeams();
         return new ResponseEntity<>(null, HttpStatus.OK);

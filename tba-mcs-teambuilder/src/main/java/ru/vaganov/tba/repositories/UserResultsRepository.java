@@ -2,6 +2,7 @@ package ru.vaganov.tba.repositories;
 
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import ru.vaganov.tba.model.UserFullResult;
@@ -30,4 +31,8 @@ public interface UserResultsRepository extends JpaRepository<UserFullResult, Lon
 
     List<UserFullResult> findAllByUserIdIn(List<Long> ids);
     Optional<UserFullResult> findByUserId(Long id);
+
+    @Query("SELECT DISTINCT ur.team.id FROM UserFullResult ur")
+    List<Long> findAllUsedTeamsIds();
+
 }

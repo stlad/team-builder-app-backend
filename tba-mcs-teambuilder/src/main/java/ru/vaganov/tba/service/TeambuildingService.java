@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.vaganov.tba.BelbinApiClient;
 import ru.vaganov.tba.HardskillsApiClient;
+import ru.vaganov.tba.repositories.TeamRepository;
 import ru.vaganov.tba.repositories.UserResultsRepository;
 import ru.vaganov.tba.dto.HardskillsResultDTO;
 import ru.vaganov.tba.model.UserFullResult;
@@ -24,8 +25,11 @@ public class TeambuildingService {
 
     @Autowired
     private TeamReaperNest teamReaperNest;
+    @Autowired
+    private TeamRepository teamRepository;
 
     public void buildTeams(){
+        clearAllTeams();
         prepareAllResults();
         teamReaperNest.Reap();
     }
@@ -36,18 +40,22 @@ public class TeambuildingService {
         List<UserFullResult> preparedResults = new ArrayList<>();
         for(HardskillsResultDTO profResult : profRoles){
             var belbinResult = belbinApi.getUserResultById(profResult.getUserId());
-            var userResult = new UserFullResult();
+            var userResult = userResultsRepository.findByUserId(profResult.getUserId()).orElseGet(UserFullResult::new);
             userResult.setUserId(profResult.getUserId());
             userResult.setTeamRoleId(belbinResult.getRoleId());
             userResult.setProfRoleId(profResult.getHardRoleId());
-
+            userResult.setTeam(null);
             preparedResults.add(userResult);
         }
         userResultsRepository.saveAll(preparedResults);
     }
 
-    public void clearAll(){
-        userResultsRepository.deleteAll();
+    public void clearAllTeams(){
+        teamRepository.deleteAll();
     }
 
+    public void deleteEmptyTeams(){
+        var s = userResultsRepository.findAllUsedTeamsIds();
+        teamRepository.deleteAllByIdNotIn(s);
+    }
 }

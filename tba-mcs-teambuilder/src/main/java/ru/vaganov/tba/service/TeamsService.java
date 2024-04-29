@@ -62,4 +62,13 @@ public class TeamsService {
             return null;
         return getTeamFullDTO(result.getTeam().getId());
     }
+
+    public List<TeamFullDTO> findAllTeams(){
+        List<Long> teamIds = teamRepository.findAll().stream().map(Team::getId).toList();
+        return teamIds.stream().map(this::getTeamFullDTO).collect(Collectors.toList());
+    }
+
+    public List<Long> getTeamsIds(){
+        return teamRepository.findAll().stream().map(Team::getId).toList();
+    }
 }
