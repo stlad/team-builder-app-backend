@@ -8,4 +8,6 @@ public class ProjectDTO {
     private String name;
     private String description;
     private String customer;
+
+    private Integer teamsCount;
 }

@@ -13,4 +13,7 @@ public interface TeamRepository extends JpaRepository<Team, Long> {
     @Modifying
     @Query("DELETE FROM Team WHERE id NOT IN :ids")
     void deleteAllByIdNotIn(List<Long> ids);
+
+    List<Team> findAllByAttachedProject_Id(Long projectId);
+    Integer countAllByAttachedProject_Id(Long projectId);
 }

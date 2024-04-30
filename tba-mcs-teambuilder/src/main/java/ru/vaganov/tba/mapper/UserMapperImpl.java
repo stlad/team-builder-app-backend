@@ -31,6 +31,7 @@ public class UserMapperImpl {
         dto.setId(userDTO.getId());
         dto.setFirstname(userDTO.getFirstname());
         dto.setLastname(userDTO.getLastname());
+        dto.setMiddlename(userDTO.getMiddlename());
         dto.setDateRegister(userDTO.getDateRegister());
         dto.setAcademicGroup(userDTO.getAcademicGroup());
         dto.setProfRole(hardRoleExternalDTO);
