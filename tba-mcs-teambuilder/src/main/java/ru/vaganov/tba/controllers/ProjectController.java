@@ -65,4 +65,10 @@ public class ProjectController {
     public ResponseEntity<List<Long>> getProjectById(){
         return new ResponseEntity<>(projectService.getAllIds(), HttpStatus.OK);
     }
+
+    @Operation(description = "Обновить новый проект", summary = "Обновить проект")
+    @PutMapping("/")
+    public ResponseEntity<ProjectDTO> editProject(@RequestBody ProjectDTO dto){
+        return new ResponseEntity<>(projectService.saveNewProject(dto), HttpStatus.OK);
+    }
 }

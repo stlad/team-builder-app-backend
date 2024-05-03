@@ -1,5 +1,6 @@
 package ru.vaganov.tba.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ public class TeamBuilderController {
     private TeambuildingService teambuildingService;
 
 
+    @Operation(description = "Старт процесса распределения по командам", summary = "Инициализировать распределение по командам")
     @GetMapping("/start")
     public ResponseEntity<String> buildCommands(){
         teambuildingService.buildTeams();

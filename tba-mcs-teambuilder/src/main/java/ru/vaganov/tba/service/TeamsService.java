@@ -5,9 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.vaganov.tba.AdminApiClient;
 import ru.vaganov.tba.dto.UserExternalDTO;
+import ru.vaganov.tba.mapper.TeamMapper;
 import ru.vaganov.tba.mapper.UserMapperImpl;
 import ru.vaganov.tba.model.Team;
 import ru.vaganov.tba.model.UserFullResult;
+import ru.vaganov.tba.model.dto.TeamDTO;
 import ru.vaganov.tba.model.dto.TeamFullDTO;
 import ru.vaganov.tba.model.dto.UserFullDTO;
 import ru.vaganov.tba.repositories.TeamRepository;
@@ -25,6 +27,8 @@ public class TeamsService {
     private AdminApiClient adminApiClient;
     @Autowired
     private UserMapperImpl userMapper;
+    @Autowired
+    private TeamMapper teamMapper;
     @Autowired
     private TeamRepository teamRepository;
 
@@ -70,5 +74,10 @@ public class TeamsService {
 
     public List<Long> getTeamsIds(){
         return teamRepository.findAll().stream().map(Team::getId).toList();
+    }
+
+    public TeamDTO saveNewTeam(TeamDTO dto){
+        Team team = teamRepository.save(teamMapper.fromDTO(dto));
+        return teamMapper.toDTO(team);
     }
 }
