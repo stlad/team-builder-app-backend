@@ -5,7 +5,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import ru.vaganov.tba.config.FileParser;
 import ru.vaganov.tba.mapper.UserMapper;
+import ru.vaganov.tba.models.SystemRoles;
 import ru.vaganov.tba.models.User;
 import ru.vaganov.tba.models.dto.UserDTO;
 import ru.vaganov.tba.repositories.UserRepository;
@@ -23,7 +26,6 @@ public class UserService {
     private UserMapper userMapper;
     @Autowired
     private PasswordEncoder encoder;
-
     public UserDTO saveUser(UserDTO dto){
         User user = userMapper.fromDto(dto);
         if(dto.getId() == null || !userRepository.existsById(dto.getId()))
@@ -58,5 +60,25 @@ public class UserService {
 
     public List<UserDTO> findAll(){
         return userMapper.toDto(userRepository.findAll());
+    }
+
+    public List<UserDTO> loadFromFile(MultipartFile file){
+        FileParser parser = new FileParser<UserDTO>();
+        parser.exec(file,
+                (str)->{
+                    String[] studs = str.split(",");
+                    return  UserDTO.builder()
+                            .lastname(studs[0])
+                            .firstname(studs[1])
+                            .middlename(studs[2])
+                            .email(studs[3])
+                            .username(studs[4])
+                            .systemRole(SystemRoles.STUDENT)
+                            .academicGroup("РИ-40022")
+                            .password("test")
+                            .build();
+                },
+                (user)->saveUser((UserDTO) user));
+        return findAll();
     }
 }

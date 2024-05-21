@@ -5,8 +5,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import ru.vaganov.tba.models.dto.UserDTO;
 import ru.vaganov.tba.service.UserService;
 
@@ -58,5 +60,11 @@ public class UserController {
     @GetMapping("/all")
     public ResponseEntity<List<UserDTO>> getAllUsers(){
         return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
+    }
+
+    @Operation(summary = "Загрузить пользователей", description = "Загрузить пользователей из файла")
+    @PostMapping(value = "/load", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity loadUsers(@RequestPart MultipartFile file){
+        return new ResponseEntity<>(userService.loadFromFile(file), HttpStatus.OK);
     }
 }
