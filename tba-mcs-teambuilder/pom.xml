@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>ru.vaganov.tba</groupId>
 	<artifactId>tba-mcs-teambuilder</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>tba-mcs-teambuilder</name>
 	<description>Teambuilder microservice for TBA</description>
 	<properties>
